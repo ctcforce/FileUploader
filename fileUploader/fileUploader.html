@@ -1,0 +1,21 @@
+<template>
+    <lightning-file-upload
+            label="Upload Associated File(s)"
+            data-parentid={parentId}
+            onuploadfinished={handleFileUploadFinished}
+            multiple>
+    </lightning-file-upload>
+    <template for:each={documents} for:item="doc">
+        <lightning-button
+                key={doc.documentId}
+                data-docid={doc.documentId}
+                label={doc.name}
+                title="Click to Delete"
+                icon-name="action:delete"
+                icon-position="right"
+                variant="base"
+                class="block"
+                onclick={handleDeleteFile}>
+        </lightning-button>
+    </template>
+</template>
