@@ -27,31 +27,11 @@ export default class FileUploader extends LightningElement {
     }
 
     handleDeleteFile(event) {
-
         const docId = event.target.dataset.docid;
         this.documents.splice(this.documents.findIndex(doc => doc.documentId === docId), 1);
 
         this.dispatchEvent(
             new CustomEvent('filedeleted', {detail: {docId: docId, parentId: this.parentId}})
         );
-
-        deleteFile({documentId: docId})
-            .then(data => {
-            })
-            .catch(error => {
-                console.log('deleteFile error:', error);
-                const reducedError = reduceErrors(error);
-                console.log('deleteFile reducedError:', reducedError);
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'deleteFile Error',
-                        message: Array.isArray(reducedError) ? reducedError[0] : reducedError,
-                        variant: 'error',
-                        mode: 'sticky'
-                    })
-                );
-            })
-            .finally(onFinal => {
-            });
     }
 }
